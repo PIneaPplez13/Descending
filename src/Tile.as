@@ -92,7 +92,7 @@ package
 			{
 				WarningEmitter.emit("Warning", (RandomColumn * 50) + 25, (RandomRow * 50) + 25);
 			}
-			if (time >= 60) CreationEmitter.emit("Creation", (RandomColumn * 50) + 25, (RandomRow * 50) + 25);
+			if (time >= 60) CreationEmitter.emit("Creation", RandomColumn * 50 + 25, RandomRow * 50 + 25);
 			if (time >= 180)
 			{
 				tiles.setTile(RandomColumn, RandomRow, 1);

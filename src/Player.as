@@ -32,13 +32,18 @@ package
 			{
 				BeforeTime += 1;
 				Gravity = 0;
+				
 			}
-			else Gravity = 2;
+			else 
+			{
+				Gravity = 2;
+				//Player input.
+				if (Input.check(Key.D)) Xmomentum += 1.25; //move right
+				else if (Input.check(Key.A)) Xmomentum += -1.25; //move left
+				else Xmomentum = 0; //not moving
+			}
 			
-			//Player input.
-			if (Input.check(Key.D)) Xmomentum += 1.25; //move right
-			else if (Input.check(Key.A)) Xmomentum += -1.25; //move left
-			else Xmomentum = 0; //not moving
+			
 			
 			if (Input.pressed(Key.W) && JumpNumber == 0)
 			{
@@ -84,6 +89,13 @@ package
 				Gravity = 2;
 				JumpNumber = 0;
 			}
+			if (y > FP.screen.height + 1000) Dead();
+			if (collide("Spark", x, y)) Dead();
+		}
+		public function Dead():void
+		{
+			var deadtime:int = 0;
+			FP.world = new Level1;
 		}
 	}
 }
