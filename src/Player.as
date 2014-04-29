@@ -14,7 +14,7 @@ package
 		public var Ymomentum:Number = 0;
 		public var BeforeTime:Number = 0;
 		
-		public function Player(INx:int, INy:int)
+		public function Player(INx:Number, INy:Number)
 		{
 			x = INx;
 			y = INy;
@@ -89,7 +89,7 @@ package
 				Gravity = 2;
 				JumpNumber = 0;
 			}
-			if (y > FP.screen.height + 1000) Dead();
+			if (y > FP.screen.height + 10000) Dead();
 			if (collide("Spark", x, y)) Dead();
 		}
 		public function Dead():void
