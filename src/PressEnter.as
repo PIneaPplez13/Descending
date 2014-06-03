@@ -12,7 +12,7 @@ package
 		{
 			Text.size = 32;
 			Text.font = "Pixelade";
-			graphic = new Text("Press Enter", 325, 380, "visible");
+			graphic = new Text("Press Enter", 265, 320, "visible");
 		}
 		
 		public var time:Number = 0;

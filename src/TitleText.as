@@ -15,8 +15,7 @@ package
 		{	
 			Text.font = "Ruritania";
 			Text.size = 72;
-			graphic = new Text("Descending", 200, 200, "alpha");
-			
+			graphic = new Text("Descending", 140, 140, "alpha");
 		}
 		
 		

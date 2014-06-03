@@ -8,7 +8,7 @@ package
 		public function Level1()
 		{
 			FP.screen.color = 0xFFFFFF;
-			add(new Player(382.5, 225));
+			add(new Player(310, 160));
 			add(new Tile(0));
 		}
 	}

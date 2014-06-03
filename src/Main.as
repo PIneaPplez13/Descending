@@ -12,7 +12,7 @@ package
 		
 		public function Main()
 		{
-			super(800, 600, 60);
+			super(640, 480, 60);
 			FP.world = new TitleScreen;
 		}
 		
