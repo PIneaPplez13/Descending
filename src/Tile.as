@@ -17,13 +17,17 @@ package
 		[Embed(source = 'assets/Graphics/Tileset.png')] private const TILESET:Class;
 		private var tiles:Tilemap;
 		private var grid:Grid;
+		
 		private var WarningEmitter:Emitter;
 		private var CreationEmitter:Emitter;
+		
 		private var BeforeTime:int = 0;
 		private var TotalTime:Number = 1;
+		
 		private var BlockTime:Number = 0;
 		private var BlockDown:Number = 180;
 		private var BlockNumber:int = 1;
+		
 		private var RandomColumn:Array = new Array(0, 0, 0, 0);
 		private var RandomRow:Array = new Array(0, 0, 0, 0);
 		private var IntroDone:Boolean = false;

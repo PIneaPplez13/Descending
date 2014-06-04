@@ -9,14 +9,14 @@ package
 	
 	public class Player extends Entity
 	{
-		public var Gravity:Number = 2;
-		public var Xmomentum:Number = 0;
-		public var Ymomentum:Number = 0;
-		public var JumpNumber:int = 2;
-		public var DeadTime:int = 0;
-		public var BeforeTime:Number = 0;
-		
-		private const MAX_SPEED:Number = 4.25;
+		private var Gravity:Number = 2;
+		private var Xmomentum:Number = 0;
+		private var Ymomentum:Number = 0;
+		private var DeadTime:int = 0;
+		private var BeforeTime:Number = 0;
+		private var CanJump:Boolean = false;
+		private var JumpNumber:int = 0;
+		private var MaxSpeed:Number = 4;
 		
 		public function Player(INx:Number, INy:Number)
 		{
@@ -31,31 +31,34 @@ package
 		override public function update():void
 		{
 			//Intro stuff
-			if (BeforeTime < 200) 
+			if (BeforeTime < 200)
 			{
 				BeforeTime += 1;
 				Gravity = 0;
-				
 			}
-			else 
+			else //After intro
 			{
 				Gravity = 2;
-				//Player input.
-				if (Input.check(Key.D)) Xmomentum += 1.25; //move right
-				else if (Input.check(Key.A)) Xmomentum += -1.25; //move left
-				else Xmomentum = 0; //not moving
+				
+				//Player input & physics for horizontal movement
+				if (Input.check(Key.D)) Xmomentum += 1; //Move right
+				else if (Input.check(Key.A)) Xmomentum += -1; //Move left
+				else if (Xmomentum > 0) Xmomentum += -0.5; //Momentum carries you right
+				else if (Xmomentum < 0) Xmomentum += 0.5; //Momentum carries you left
 			}
 			
 			//Jumping
-			if (Input.pressed(Key.W) && JumpNumber < 2)
+			if (Input.pressed(Key.W) && CanJump == true && JumpNumber < 2)
 			{
 				Ymomentum = -20;
 				JumpNumber += 1;
 			}
+			if (Ymomentum < 12) CanJump = true;
+			else CanJump = false;
 			
-			//Applying Physics.
-			if (Xmomentum > MAX_SPEED) Xmomentum = MAX_SPEED;
-			if (Xmomentum < -MAX_SPEED) Xmomentum = -MAX_SPEED;
+			//Player physics
+			if (Xmomentum > MaxSpeed) Xmomentum = MaxSpeed;
+			if (Xmomentum < -MaxSpeed) Xmomentum = -MaxSpeed;
 			Ymomentum += Gravity;
 			if (Ymomentum > 18) Ymomentum = 18;
 
@@ -79,9 +82,11 @@ package
 				Ymomentum = 0;
 				y = int(y / 40) * 40 + (40 - this.height);
 				Gravity = 2;
+				CanJump = true;
 				JumpNumber = 0;
+				MaxSpeed = 4;
 			}
-			if (collide("Platform", x, y) && Ymomentum == 2) y - 40;
+			else MaxSpeed = 5.5;
 			if (collide("Platform", x, y) && Ymomentum < 0)
 			{
 				Ymomentum = 0;
